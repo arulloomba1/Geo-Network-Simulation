@@ -1,4 +1,4 @@
-# Communication Network Simulation
+# Geo-Network Simulation
 
 This project simulates a geostationary satellite communication network with multiple data collection points (DCPs). The simulation models the TDMA-based communication protocol and visualizes the network topology and data flow.
 
@@ -9,6 +9,7 @@ This project simulates a geostationary satellite communication network with mult
 - Configurable network parameters
 - Simulated data collection and transmission
 - Satellite propagation delay modeling
+- Emergency mode simulation with rich packet content and visual highlighting
 
 ## Setup
 
@@ -20,6 +21,11 @@ pip install -r requirements.txt
 2. Run the simulation:
 ```bash
 python network_simulation.py
+```
+
+3. Run the emergency mode demo:
+```bash
+python emergency_mode_animation.py
 ```
 
 ## Configuration
@@ -34,6 +40,7 @@ All network parameters can be modified in `config.py`, including:
 ## Project Structure
 
 - `network_simulation.py`: Main simulation logic and visualization
+- `emergency_mode_animation.py`: Emergency mode demo with rich packet content
 - `config.py`: Network parameters and configuration
 - `requirements.txt`: Project dependencies
 
