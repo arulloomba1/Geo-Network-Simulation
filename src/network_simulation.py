@@ -16,9 +16,9 @@ class CommunicationNode:
         self.power_state = 'standby' 
         self.transmission_count = 0
         self.total_bytes_sent = 0
-
+        
+    """Simulate data collection from sensors"""
     def collect_data(self, timestamp):
-        """Simulate data collection from sensors"""
         data = {
             'timestamp': timestamp,
             'value': np.random.normal(0, 1),  
@@ -27,13 +27,11 @@ class CommunicationNode:
         self.data_buffer.append(data)
 
     def can_transmit(self, current_time):
-        """Check if it's this node's turn to transmit"""
         cycle_time = current_time % config.TDMA_CYCLE_DURATION
         slot_start = self.slot_number * config.TDMA_SLOT_DURATION
         return slot_start <= cycle_time < slot_start + config.TDMA_SLOT_DURATION
     
     def update_power_state(self, current_time):
-        """Update the node's power state based on current time"""
         if self.can_transmit(current_time):
             self.power_state = 'tx'
         elif current_time % 3600 < 60: 
@@ -58,7 +56,6 @@ class Satellite:
         self.total_bytes_received = 0
 
     def receive_packet(self, packet, timestamp):
-        """Simulate packet reception with propagation delay"""
         self.received_packets.append({
             'packet': packet,
             'timestamp': timestamp + config.SATELLITE_PROPAGATION_DELAY
@@ -74,7 +71,6 @@ class NetworkSimulation:
         self.visualizer = NetworkVisualizer(self)
         
     def setup_network(self):
-        """Initialize network nodes in a circular pattern"""
         for i in range(config.NUM_NODES):
             angle = 2 * np.pi * i / config.NUM_NODES
             radius = 5
@@ -82,7 +78,6 @@ class NetworkSimulation:
             self.nodes.append(CommunicationNode(i, position))
             
     def update(self, frame):
-        """Update the simulation state"""
         self.current_time = frame
         
         for node in self.nodes:
@@ -98,7 +93,6 @@ class NetworkSimulation:
         self.visualizer.update(frame)
         
     def run_simulation(self):
-        """Run the network simulation"""
         frames = np.arange(0, 2*3600, 1)  
         
         ani = FuncAnimation(self.visualizer.fig, self.update,
@@ -113,7 +107,6 @@ class NetworkSimulation:
         plt.show()
         
     def get_network_statistics(self):
-        """Get current network statistics"""
         stats = {
             'total_transmissions': sum(node.transmission_count for node in self.nodes),
             'total_bytes_sent': sum(node.total_bytes_sent for node in self.nodes),

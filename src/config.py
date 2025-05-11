@@ -1,59 +1,58 @@
 """
-Configuration parameters for the communication network simulation.
-All parameters can be modified to match real-world scenarios.
+Configuration parameters for the network simulation. We have modified parameters to simulate real world, of course, not perfectly
 """
 
-# Time parameters
-SENSING_INTERVAL = 15  # minutes
-TDMA_SLOT_DURATION = 10  # seconds
-TDMA_CYCLE_DURATION = 3600  # seconds (1 hour)
+# Time 
+SENSING_INTERVAL = 15  
+TDMA_SLOT_DURATION = 10  
+TDMA_CYCLE_DURATION = 3600  
 
-# Communication parameters
-BAUD_RATE = 300  # bits per second
-FREQUENCY_BAND = (401, 402)  # MHz
+# Communication 
+BAUD_RATE = 300  
+FREQUENCY_BAND = (401, 402)  
 
-# Data parameters
-RAW_PACKET_SIZE = 375  # bytes (300 bits/sec × 10 sec = 3000 bits = 375 bytes)
-USABLE_PAYLOAD = 250  # bytes (after protocol overhead)
-PROTOCOL_OVERHEAD = RAW_PACKET_SIZE - USABLE_PAYLOAD  # bytes
+# Data 
+RAW_PACKET_SIZE = 375  
+USABLE_PAYLOAD = 250  
+PROTOCOL_OVERHEAD = RAW_PACKET_SIZE - USABLE_PAYLOAD  
 
-# Network parameters
-NUM_NODES = 5  # number of communication nodes (can be set to 2527 for full network)
-SATELLITE_PROPAGATION_DELAY = 0.25  # seconds (typical GEO satellite delay)
+# Network 
+NUM_NODES = 5  
+SATELLITE_PROPAGATION_DELAY = 0.25  
 
-# Data collection parameters
-DATA_POINTS_PER_PACKET = 10  # number of sensor readings per transmission
-SENSOR_ACCURACY = 0.95  # sensor measurement accuracy (95%)
+# Data collection 
+DATA_POINTS_PER_PACKET = 10  
+SENSOR_ACCURACY = 0.95  
 
-# Power consumption parameters
-TX_VOLTAGE = 12.0  # V DC
-TX_CURRENT = 1.8  # A during transmission
-STANDBY_VOLTAGE = 12.0  # V DC
-STANDBY_CURRENT = 0.0028  # A during standby (2.8 mA)
-GPS_VOLTAGE = 12.0  # V DC
-GPS_CURRENT = 0.025  # A during GPS fix (25 mA)
-GPS_FIX_DURATION = 60  # seconds for GPS fix
+# Power consumption 
+TX_VOLTAGE = 12.0  
+TX_CURRENT = 1.8  
+STANDBY_VOLTAGE = 12.0  
+STANDBY_CURRENT = 0.0028  
+GPS_VOLTAGE = 12.0  
+GPS_CURRENT = 0.025  
+GPS_FIX_DURATION = 60  
 
-# Energy calculations
-TX_ENERGY_PER_TRANSMISSION = TX_VOLTAGE * TX_CURRENT * TDMA_SLOT_DURATION  # Joules
-TX_ENERGY_PER_TRANSMISSION_WH = TX_ENERGY_PER_TRANSMISSION / 3600  # Wh
-TX_ENERGY_PER_DAY = TX_ENERGY_PER_TRANSMISSION_WH * 24  # Wh/day
-STANDBY_ENERGY_PER_DAY = STANDBY_VOLTAGE * STANDBY_CURRENT * 24  # Wh/day
-GPS_ENERGY_PER_DAY = GPS_VOLTAGE * GPS_CURRENT * GPS_FIX_DURATION * 24 / 3600  # Wh/day
-TOTAL_ENERGY_PER_DAY = TX_ENERGY_PER_DAY + STANDBY_ENERGY_PER_DAY + GPS_ENERGY_PER_DAY  # Wh/day
-TOTAL_NETWORK_ENERGY_PER_DAY = TOTAL_ENERGY_PER_DAY * NUM_NODES  # Wh/day
+# Energy 
+TX_ENERGY_PER_TRANSMISSION = TX_VOLTAGE * TX_CURRENT * TDMA_SLOT_DURATION  
+TX_ENERGY_PER_TRANSMISSION_WH = TX_ENERGY_PER_TRANSMISSION / 3600  
+TX_ENERGY_PER_DAY = TX_ENERGY_PER_TRANSMISSION_WH * 24  
+STANDBY_ENERGY_PER_DAY = STANDBY_VOLTAGE * STANDBY_CURRENT * 24  
+GPS_ENERGY_PER_DAY = GPS_VOLTAGE * GPS_CURRENT * GPS_FIX_DURATION * 24 / 3600  
+TOTAL_ENERGY_PER_DAY = TX_ENERGY_PER_DAY + STANDBY_ENERGY_PER_DAY + GPS_ENERGY_PER_DAY  
+TOTAL_NETWORK_ENERGY_PER_DAY = TOTAL_ENERGY_PER_DAY * NUM_NODES  
 
-# Data throughput calculations
-DATA_PER_TRANSMISSION = USABLE_PAYLOAD  # bytes
-DATA_PER_DAY = DATA_PER_TRANSMISSION * 24  # bytes/day
-TOTAL_NETWORK_DATA_PER_DAY = DATA_PER_DAY * NUM_NODES  # bytes/day
-RAW_NETWORK_DATA_PER_DAY = RAW_PACKET_SIZE * 24 * NUM_NODES  # bytes/day
+# Data throughput 
+DATA_PER_TRANSMISSION = USABLE_PAYLOAD  
+DATA_PER_DAY = DATA_PER_TRANSMISSION * 24  
+TOTAL_NETWORK_DATA_PER_DAY = DATA_PER_DAY * NUM_NODES  
+RAW_NETWORK_DATA_PER_DAY = RAW_PACKET_SIZE * 24 * NUM_NODES  
 
-# Time efficiency parameters
-ACTIVE_TIME_PER_DAY = TDMA_SLOT_DURATION * 24  # seconds
-TOTAL_TIME_PER_DAY = 24 * 3600  # seconds
-CHANNEL_UTILIZATION = ACTIVE_TIME_PER_DAY / TOTAL_TIME_PER_DAY * 100  # percentage
+# Time efficiency 
+ACTIVE_TIME_PER_DAY = TDMA_SLOT_DURATION * 24  
+TOTAL_TIME_PER_DAY = 24 * 3600  
+CHANNEL_UTILIZATION = ACTIVE_TIME_PER_DAY / TOTAL_TIME_PER_DAY * 100  
 
-# Visualization parameters
-PLOT_REFRESH_RATE = 1  # seconds
-ANIMATION_SPEED = 1  # multiplier for animation speed 
+# Visualization 
+PLOT_REFRESH_RATE = 1  
+ANIMATION_SPEED = 1  

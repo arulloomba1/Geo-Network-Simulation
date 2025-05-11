@@ -11,7 +11,7 @@ class EmergencyCommunicationNode:
         self.position = position
         self.data_buffer = []
         self.last_transmission = None
-        self.slot_number = node_id  # Simple TDMA slot assignment
+        self.slot_number = node_id  
         self.power_state = 'standby'
         self.transmission_count = 0
         self.total_bytes_sent = 0
@@ -42,9 +42,8 @@ class EmergencyCommunicationNode:
 
     def can_transmit(self, current_time):
         if self.emergency:
-            # Emergency: transmit every 5 min (300s) or randomly (GOES)
             scheduled = (current_time % 300 == 0)
-            goes_random = random.random() < 0.02  # ~2% chance per second
+            goes_random = random.random() < 0.02  
             return scheduled or goes_random
         else:
             cycle_time = current_time % config.TDMA_CYCLE_DURATION
@@ -61,7 +60,6 @@ class EmergencyCommunicationNode:
 
     def transmit_data(self, current_time):
         if self.can_transmit(current_time) and self.data_buffer:
-            # Emergency: rich packet, variable size, recent readings, trends, etc.
             if self.emergency:
                 num_readings = random.randint(5, 12)
                 readings = self.last_values[-num_readings:]
@@ -76,7 +74,7 @@ class EmergencyCommunicationNode:
                     'solar_voltage': self.solar_voltage,
                     'gps_fix': self.gps_fix,
                     'diagnostics': self.sensor_diagnostics,
-                    'emergency_flag': 0b10000010,  # e.g., rising water + sensor error
+                    'emergency_flag': 0b10000010, 
                     'packet_size': packet_size
                 }
                 self.transmission_count += 1
@@ -116,7 +114,6 @@ class EmergencyNetworkSimulation:
             angle = 2 * np.pi * i / config.NUM_NODES
             radius = 5
             position = (radius * np.cos(angle), radius * np.sin(angle))
-            # Make node 0 and 1 emergency for demo
             emergency = (i == 0 or i == 1)
             self.nodes.append(EmergencyCommunicationNode(i, position, emergency=emergency))
 
@@ -124,7 +121,6 @@ class EmergencyNetworkSimulation:
         self.current_time = frame
         for node in self.nodes:
             node.update_power_state(self.current_time)
-            # Collect data every 5 min for emergency, else normal interval
             if node.emergency:
                 if self.current_time % (5 * 60) == 0:
                     node.collect_data(self.current_time)
@@ -137,7 +133,7 @@ class EmergencyNetworkSimulation:
         self.visualizer.update(frame)
 
     def run_simulation(self):
-        frames = np.arange(0, 1800, 1)  # 30 min, 1s steps
+        frames = np.arange(0, 1800, 1)  
         ani = FuncAnimation(self.visualizer.fig, self.update,
                             frames=frames,
                             interval=50,
