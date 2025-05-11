@@ -20,17 +20,17 @@ pip install -r requirements.txt
 
 2. Run the simulation:
 ```bash
-python network_simulation.py
+python run_simulation.py
 ```
 
 3. Run the emergency mode demo:
 ```bash
-python emergency_mode_animation.py
+python -m src.emergency_mode_animation
 ```
 
 ## Configuration
 
-All network parameters can be modified in `config.py`, including:
+All network parameters can be modified in `src/config.py`, including:
 - Time parameters (sensing interval, TDMA slot duration)
 - Communication parameters (packet size, baud rate)
 - Network parameters (number of nodes, propagation delay)
@@ -39,10 +39,16 @@ All network parameters can be modified in `config.py`, including:
 
 ## Project Structure
 
-- `network_simulation.py`: Main simulation logic and visualization
-- `emergency_mode_animation.py`: Emergency mode demo with rich packet content
-- `config.py`: Network parameters and configuration
+- `src/` — All source code
+  - `network_simulation.py`: Main simulation logic and visualization
+  - `emergency_mode_animation.py`: Emergency mode demo with rich packet content
+  - `config.py`: Network parameters and configuration
+  - `visualization.py`: Visualization utilities
+- `output/`: Simulation outputs (mp4, gif, etc.)
+- `tests/`: Unit tests (empty for now)
 - `requirements.txt`: Project dependencies
+- `run_simulation.py`: Entry point for the main simulation
+- `README.md`: Project documentation
 
 ## Future Improvements
 

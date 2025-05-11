@@ -1,4 +1,4 @@
-from network_simulation import NetworkSimulation
+from src.network_simulation import NetworkSimulation
 
 if __name__ == "__main__":
     simulation = NetworkSimulation()

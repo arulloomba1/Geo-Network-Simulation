@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-import config
-from visualization import NetworkVisualizer
+from src import config
+from src.visualization import NetworkVisualizer
 import random
 
 class EmergencyCommunicationNode:

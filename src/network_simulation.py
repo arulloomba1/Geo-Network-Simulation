@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import networkx as nx
 from datetime import datetime, timedelta
-import config
-from visualization import NetworkVisualizer
+from src import config
+from src.visualization import NetworkVisualizer
 
 class CommunicationNode:
     def __init__(self, node_id, position):

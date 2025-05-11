@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import config
+from src import config
 from matplotlib.patches import Circle, Arrow
 from matplotlib.animation import FuncAnimation
 
